@@ -4,7 +4,37 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>GradientSoftware.$(AssemblyName)</Title>
+    <Description>A SCARS Core library for SCARS framwork dotnet 9 and above.</Description>
+    <Copyright>© 2025 Gareth Bird</Copyright>
+    <ErrorReport>none</ErrorReport>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <RepositoryType></RepositoryType>
+    <PackageTags>SCARS; scars; utils; gradient; software; google</PackageTags>
+    <PackageId>GradientSoftware.$(AssemblyName)</PackageId>
+    <RepositoryUrl>https://github.com/garethbirduk/SCARS.Analyzers</RepositoryUrl>
+    <Title>SCARS.$(AssemblyName)</Title>
+    <Version>0.1.0</Version>
+    <PackageProjectUrl>https://github.com/garethbirduk/SCARS.Analyzers</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\resources\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 
   <ItemGroup>
