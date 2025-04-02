@@ -1,26 +1,22 @@
-name: workflow
+name: NuGet Versioning Workflow
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - "*"
 
-# Set permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -43,12 +39,37 @@ jobs:
     - name: Install modules
       run: yarn --prefer-offline
 
-    # Add NuGet repository for publishing
+    - name: Get Version from .csproj
+      id: get_version
+      run: |
+        # Extract the version number from the .csproj file
+        version=$(grep -oP '(?<=<Version>)(.*?)(?=</Version>)' YourProject.csproj)
+        echo "Version from .csproj is $version"
+        echo "::set-output name=version::$version"
+
+    - name: Set Version Based on Branch
+      id: set_version
+      run: |
+        branch_name=$(echo $GITHUB_REF | sed 's/refs\/heads\///')
+
+        # Extract the version number, type, and description from the branch name
+        branch_version=$(echo $branch_name | sed 's/^_//' | sed 's/[^a-zA-Z0-9]/-/g')
+
+        # If the branch is "main", use the version from the .csproj, else append the branch version
+        if [[ "$branch_name" == "main" ]]; then
+          version=${{ steps.get_version.outputs.version }}
+        else
+          version=${{ steps.get_version.outputs.version }}-$branch_version
+        fi
+        
+        echo "Version set to $version"
+        echo "::set-output name=version::$version"
+
     - name: NuGet set access
       if: github.ref == 'refs/heads/main'
       run: dotnet nuget add source --username ${{ github.actor }} --password ${{ github.token }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/garethbirduk/index.json"
 
-    # Deploy the package to NuGet
     - name: NuGet deploy Package
-      if: github.ref == 'refs/heads/main'
-      run: dotnet nuget push ./SCARS.Analyzers/bin/Release/**/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate
+      run: |
+        dotnet nuget push ./SCARS.Analyzers/bin/Release/**/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate --version ${{ steps.set_version.outputs.version }}
+      if: github.ref == 'refs/heads/main' || github.ref != 'refs/heads/main'
