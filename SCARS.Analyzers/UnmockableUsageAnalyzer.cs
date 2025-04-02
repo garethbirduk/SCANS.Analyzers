@@ -1,10 +1,9 @@
-﻿using System.Collections.Immutable;
-using System.Linq;
-
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace SCARS.Analyzers;
 
@@ -14,14 +13,14 @@ public class UnmockableUsageAnalyzer : DiagnosticAnalyzer
     private static readonly DiagnosticDescriptor Rule = new(
         id: DiagnosticId,
         title: "Mocking of Unmockable Type",
-        messageFormat: "Type '{0}' is marked as [{1}]. {2}", // ← supports 3 args now
+        messageFormat: "Type '{0}' is marked as [{1}] {2}", // ← supports 3 args now
         category: "SCARS",
-        defaultSeverity: DiagnosticSeverity.Warning,
+        defaultSeverity: DiagnosticSeverity.Error,
         isEnabledByDefault: true,
         description: "This type should not be mocked. Use a fake or stub instead."
     );
 
-    private static ITypeSymbol? GetUnmockableType(ITypeSymbol symbol)
+    private static ITypeSymbol GetUnmockableType(ITypeSymbol symbol)
     {
         if (symbol is INamedTypeSymbol namedType)
         {
@@ -93,7 +92,7 @@ public class UnmockableUsageAnalyzer : DiagnosticAnalyzer
     }
 
     public const string DiagnosticId = "SCARS001";
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
     public override void Initialize(AnalysisContext context)
     {
