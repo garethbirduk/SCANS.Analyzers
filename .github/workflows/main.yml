@@ -43,7 +43,7 @@ jobs:
       id: get_version
       run: |
         # Extract the version number from the .csproj file
-        version=$(grep -oP '(?<=<Version>)(.*?)(?=</Version>)' SCARS.Analyzers.csproj)
+        version=$(grep -oP '(?<=<Version>)(.*?)(?=</Version>)' SCARS.Analyzers/SCARS.Analyzers.csproj)
         echo "Version from .csproj is $version"
         echo "::set-output name=version::$version"
 
