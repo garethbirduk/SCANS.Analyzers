@@ -65,11 +65,24 @@ jobs:
         echo "Version set to $version"
         echo "::set-output name=version::$version"
 
+    - name: Update Version in .csproj
+      run: |
+        # Update the version in the .csproj file based on the branch version
+        sed -i 's/<Version>.*<\/Version>/<Version>${{ steps.set_version.outputs.version }}<\/Version>/' SCARS.Analyzers/SCARS.Analyzers.csproj
+        echo "Updated .csproj version to ${{ steps.set_version.outputs.version }}"
+
+    - name: Pack NuGet Package
+      run: |
+        # Pack the NuGet package with the updated version
+        dotnet pack ./SCARS.Analyzers/SCARS.Analyzers.csproj --configuration Release --output ./nupkgs
+
     - name: NuGet set access
       if: github.ref == 'refs/heads/main'
       run: dotnet nuget add source --username ${{ github.actor }} --password ${{ github.token }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/garethbirduk/index.json"
 
     - name: NuGet deploy Package
       run: |
-        dotnet nuget push ./SCARS.Analyzers/bin/Release/**/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate --version ${{ steps.set_version.outputs.version }}
+        # Push the generated NuGet package to the NuGet repository
+        dotnet nuget push ./nupkgs/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate
       if: github.ref == 'refs/heads/main' || github.ref != 'refs/heads/main'
+    
