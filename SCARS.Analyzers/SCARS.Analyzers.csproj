@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>GradientSoftware.$(AssemblyName)</Title>
+    <Description>A SCARS Core library for SCARS framework .NET 9 and above.</Description>
+    <Copyright>© 2025 Gareth Bird</Copyright>
+    <ErrorReport>none</ErrorReport>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>SCARS; scars; utils; gradient; software; google</PackageTags>
+    <PackageId>GradientSoftware.$(AssemblyName)</PackageId>
+    <RepositoryUrl>https://github.com/garethbirduk/SCARS.Analyzers</RepositoryUrl>
+    <Title>SCARS.$(AssemblyName)</Title>
+    <Version>0.1.0</Version>
+    <PackageProjectUrl>https://github.com/garethbirduk/SCARS.Analyzers</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <Target Name="AddAnalyzerReleaseTracking">
+    <PropertyGroup>
+      <AnalyzerVersion>$(Version)</AnalyzerVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Analyzer Include="AnalyzerReleaseTracking($(AnalyzerVersion))" />
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\resources\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

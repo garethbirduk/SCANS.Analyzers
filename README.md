@@ -1,44 +1,91 @@
-[<img src="https://raw.githubusercontent.com/garethbirduk/GradientSoftware.REPONAME/main/resources/icon.png" width="25" height="25">](https://github.com/garethbirduk/GradientSoftware.REPONAME)
-[![main](https://github.com/garethbirduk/GradientSoftware.REPONAME/actions/workflows/main.yml/badge.svg)](https://github.com/garethbirduk/GradientSoftware.REPONAME/actions)
-[![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/garethbirduk/GIST_ID/raw/code-coverage.json)](https://garethbirduk.github.io/GradientSoftware.REPONAME)
 
-# Template for dotnet projects
+# SCARS.Analyzers
 
-- [ ] GH_APIKEY - Generate this in developer settings including package creation / deletion<br>
-- [ ] GIST_AUTH_TOKEN - Generate this in developer settings including gist creation
-- [ ] GISTID - Create a gist and get the GISTID in this step
-- [ ] REPONAME - Repo name (without GradientSoftware.) e.g. Utils
+SCARS (Short Cuts Are Rarely Shorter) is a framework focused on **clean, testable, and logic-separated .NET code**. The **SCARS.Analyzers** project contains **Roslyn analyzers** that enforce key architectural rules and best practices within your .NET codebase, ensuring consistent quality and maintainability.
 
-## Generate coverage gist
-https://gist.github.com/
-- [ ] Set Gist description - eg code-coverage-utils.json
-- [ ] Set Gist filename - eg code-coverage-utils.json
-- [ ] Set Gist content - eg code-coverage-utils.json
-- [ ] Note the GISTID
+## Features
 
-# Folder level Search and Replace in files
-- [ ] REPONAME
-- [ ] GISTID - note GISTID is the mask; GIST_ID is the reference to the environment variable which must remain as GIST_ID not the value!
+- **Enforce architectural principles** using Roslyn-based analyzers.
+- **Prevent mocking of unmockable types**.
+- **Ensure services follow proper dependency injection**.
+- **Enforce rules around method length and logic**.
+- **Helps maintain clean, scalable code** by enforcing coding guidelines during the build process.
 
-# Rename files and folders
-- [] /REPONAME
-- [] /REPONAME/REPONAME.csproj
-- [] /REPONAME.Test
-- [] /REPONAME.Test/REPONAME.Test.csproj
-- [] /REPONAME.sln
-      
-# Set environment variables
-https://github.com/garethbirduk/GradientSoftware.REPONAME/settings/secrets/actions
-- [ ] GH_APIKEY
-- [ ] GIST_AUTH_TOKEN
-- [ ] GIST_ID
+## Installation
 
-# Set rules
-https://github.com/garethbirduk/GradientSoftware.REPONAME/settings/rules
-- [ ] Main protection
+To install and use SCARS.Analyzers in your project, follow the steps below:
 
-# Github pages
-https://github.com/garethbirduk/GradientSoftware.REPONAME/settings/pages
-- [ ] Build and deployment source: Github Actions
-- [ ] Configure static page then Cancel. Not sure this is required.
+### Install via NuGet
 
+You can add the SCARS.Analyzers NuGet package to your project by running the following command:
+
+```bash
+dotnet add package SCARS.Analyzers --version x.y.z
+```
+
+Replace `x.y.z` with the latest stable version of **SCARS.Analyzers**.
+
+### Install via Visual Studio (Package Manager)
+
+If you are using Visual Studio, you can install the SCARS.Analyzers NuGet package from the **NuGet Package Manager** by searching for `SCARS.Analyzers`.
+
+## Usage
+
+Once the package is installed, the analyzers will automatically be included in your build process. They will run as part of your **compiler warnings** during compilation. You will receive feedback and error messages directly in your build output, indicating any violations of SCARS architectural principles.
+
+### Example Rules
+
+- **Unmockable Types**: If a type is marked as `[Unmockable]`, any attempt to mock it will result in a compile-time error.
+- **Glue vs Logic**: Classes with the `[Glue]` attribute must only contain orchestration logic, while classes marked with `[Logic]` must contain pure computation logic with no dependencies.
+- **Method Length**: Methods with fewer than 20 bytes of IL code are flagged, as long methods typically indicate that too much logic has been included in a single method.
+  
+### Customizing Rules
+
+If you want to disable specific rules or change their behavior, you can do so by modifying the configuration in your `.editorconfig` file or through direct project file settings. 
+
+For example, you can disable a rule globally using the following in your `.editorconfig`:
+
+```ini
+# Disable Unmockable rule globally
+[*.cs]
+dotnet_diagnostic.Scars001.severity = none
+```
+
+## Configuration
+
+The analyzers can be configured via the `.editorconfig` file, which allows you to specify custom behavior for each rule.
+
+### Example Configuration:
+
+```ini
+# .editorconfig file configuration for SCARS.Analyzers
+
+[*.cs]
+# Enable or disable SCARS rules
+dotnet_diagnostic.Scars001.severity = error # Block mocking unmockable types
+dotnet_diagnostic.Scars002.severity = warning # Enforce Glue vs Logic
+dotnet_diagnostic.Scars003.severity = none # Disable method length check
+```
+
+## Contributing
+
+Contributions to the SCARS.Analyzers project are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add your feature'`).
+4. Push to your forked repository (`git push origin feature/your-feature`).
+5. Open a pull request with a description of your changes.
+
+### Testing and Running the Analyzers Locally
+
+To run the analyzers locally or test them in your project, you can use **Roslyn-based test projects** or manually build and test against your codebase. Ensure your project is correctly referencing the `SCARS.Analyzers` NuGet package.
+
+## License
+
+SCARS.Analyzers is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- This project makes use of **Roslyn Analyzers** to enforce architectural rules in .NET.
+- Inspired by the SCARS philosophy, which emphasizes clean code and avoiding shortcuts that lead to technical debt.
