@@ -77,12 +77,7 @@ jobs:
         dotnet pack ./SCARS.Analyzers/SCARS.Analyzers.csproj --configuration Release --output ./nupkgs
 
     - name: NuGet set access
-      if: github.ref == 'refs/heads/main'
       run: dotnet nuget add source --username ${{ github.actor }} --password ${{ github.token }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/garethbirduk/index.json"
 
     - name: NuGet deploy Package
-      run: |
-        # Push the generated NuGet package to the NuGet repository
-        dotnet nuget push ./nupkgs/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate
-      if: github.ref == 'refs/heads/main' || github.ref != 'refs/heads/main'
-    
+      run: dotnet nuget push ./nupkgs/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate    
