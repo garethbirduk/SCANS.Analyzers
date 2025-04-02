@@ -5,21 +5,29 @@
     <LangVersion>latest</LangVersion>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>GradientSoftware.$(AssemblyName)</Title>
+    <Title>$(AssemblyName)</Title>
     <Description>A SCARS Core library for SCARS framework .NET 9 and above.</Description>
     <Copyright>© 2025 Gareth Bird</Copyright>
     <ErrorReport>none</ErrorReport>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryType>git</RepositoryType>
     <PackageTags>SCARS; scars; utils; gradient; software; google</PackageTags>
-    <PackageId>GradientSoftware.$(AssemblyName)</PackageId>
+    <PackageId>$(AssemblyName)</PackageId>
     <RepositoryUrl>https://github.com/garethbirduk/SCARS.Analyzers</RepositoryUrl>
-    <Title>SCARS.$(AssemblyName)</Title>
+    <Title>$(AssemblyName)</Title>
     <Version>0.1.0</Version>
     <PackageProjectUrl>https://github.com/garethbirduk/SCARS.Analyzers</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+  
+	<ItemGroup>
+	  <!-- Ensure that the analyzer DLL is included in the right folder, depending on the build configuration -->
+	  <Content Include="bin\$(Configuration)\netstandard2.0\SCARS.Analyzers.dll">
+		<Pack>True</Pack>
+		<PackagePath>analyzers/dotnet/cs/lib/netstandard2.0/</PackagePath>
+	  </Content>
+	</ItemGroup>
 
   <Target Name="AddAnalyzerReleaseTracking">
     <PropertyGroup>
