@@ -73,3 +73,4 @@ jobs:
       run: |
         dotnet nuget push ./SCARS.Analyzers/bin/Release/**/*.nupkg --source "github" --api-key ${{ secrets.GH_APIKEY }} --skip-duplicate --version ${{ steps.set_version.outputs.version }}
       if: github.ref == 'refs/heads/main' || github.ref != 'refs/heads/main'
+nz
