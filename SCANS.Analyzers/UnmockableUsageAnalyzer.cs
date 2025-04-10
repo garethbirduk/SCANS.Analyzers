@@ -2,8 +2,13 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Moq;
+using System;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("SCANS.Analyzers.Tests")]
 
 namespace SCANS.Analyzers;
 
@@ -13,7 +18,7 @@ public class UnmockableUsageAnalyzer : DiagnosticAnalyzer
     private static readonly DiagnosticDescriptor Rule = new(
         id: DiagnosticId,
         title: "Mocking of Unmockable Type",
-        messageFormat: "Type '{0}' is marked as [{1}] {2}", // ← supports 3 args now
+        messageFormat: "Type '{0}' is marked as [{1}] {2}",
         category: "SCANS",
         defaultSeverity: DiagnosticSeverity.Error,
         isEnabledByDefault: true,
@@ -48,7 +53,14 @@ public class UnmockableUsageAnalyzer : DiagnosticAnalyzer
             return;
 
         var type = context.SemanticModel.GetSymbolInfo(creation.Type).Symbol as INamedTypeSymbol;
-        if (type is null || !type.Name.StartsWith("Mock") || !type.IsGenericType)
+
+        if (type is not INamedTypeSymbol mockType)
+            return;
+
+        if (!mockType.ConstructedFrom.Equals(typeof(Mock<>)))
+            return;
+
+        if (!type.IsGenericType)
             return;
 
         if (!type.ContainingNamespace.ToDisplayString().StartsWith("Moq"))
