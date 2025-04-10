@@ -37,7 +37,7 @@ if not defined scriptPath (
 
 :: Run the script from the specified or default repository/script path
 echo Running script: %scriptPath%
-dotnet script %scriptPath% %GITHUB_USERNAME% SCARS.Analyzers %GITHUB_APIKEY% .\SCARS.Analyzers\SCARS.Analyzers.csproj %branch%
+dotnet script %scriptPath% %GITHUB_USERNAME% SCANS.Analyzers %GITHUB_APIKEY% .\SCANS.Analyzers\SCANS.Analyzers.csproj %branch%
 
 :: Remove the cloned repository if it was cloned
 if not defined scriptFilePath (

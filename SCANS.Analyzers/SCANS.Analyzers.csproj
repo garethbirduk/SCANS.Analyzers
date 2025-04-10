@@ -6,24 +6,24 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(AssemblyName)</Title>
-    <Description>A SCARS Core library for SCARS framework .NET 9 and above.</Description>
+    <Description>A SCANS Core library for SCANS framework.</Description>
     <Copyright>© 2025 Gareth Bird</Copyright>
     <ErrorReport>none</ErrorReport>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>SCARS; scars; utils; gradient; software; google</PackageTags>
+    <PackageTags>SCARS; SCANS; utils; software; google</PackageTags>
     <PackageId>$(AssemblyName)</PackageId>
-    <RepositoryUrl>https://github.com/garethbirduk/SCARS.Analyzers</RepositoryUrl>
+    <RepositoryUrl>https://github.com/garethbirduk/SCANS.Analyzers</RepositoryUrl>
     <Title>$(AssemblyName)</Title>
-    <Version>0.2.0</Version>
-    <PackageProjectUrl>https://github.com/garethbirduk/SCARS.Analyzers</PackageProjectUrl>
+    <Version>1.0.0</Version>
+    <PackageProjectUrl>https://github.com/garethbirduk/SCANS.Analyzers</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
   
 	<ItemGroup>
 	  <!-- Ensure that the analyzer DLL is included in the right folder, depending on the build configuration -->
-	  <Content Include="bin\$(Configuration)\netstandard2.0\SCARS.Analyzers.dll">
+	  <Content Include="bin\$(Configuration)\netstandard2.0\SCANS.Analyzers.dll">
 		<Pack>True</Pack>
 		<PackagePath>analyzers/dotnet/cs/lib/netstandard2.0/</PackagePath>
 	  </Content>

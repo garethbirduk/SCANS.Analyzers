@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace SCARS.Analyzers;
+namespace SCANS.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class UnmockableUsageAnalyzer : DiagnosticAnalyzer
@@ -14,7 +14,7 @@ public class UnmockableUsageAnalyzer : DiagnosticAnalyzer
         id: DiagnosticId,
         title: "Mocking of Unmockable Type",
         messageFormat: "Type '{0}' is marked as [{1}] {2}", // ← supports 3 args now
-        category: "SCARS",
+        category: "SCANS",
         defaultSeverity: DiagnosticSeverity.Error,
         isEnabledByDefault: true,
         description: "This type should not be mocked. Use a fake or stub instead."
@@ -91,7 +91,7 @@ public class UnmockableUsageAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    public const string DiagnosticId = "SCARS001";
+    public const string DiagnosticId = "SCANS001";
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
     public override void Initialize(AnalysisContext context)

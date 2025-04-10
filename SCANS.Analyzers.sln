@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCARS.Analyzers", "SCARS.Analyzers\SCARS.Analyzers.csproj", "{646FBBFA-BFDB-4D5A-AF97-2C2DD8CB5CCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCANS.Analyzers", "SCANS.Analyzers\SCANS.Analyzers.csproj", "{29B8B2CC-8896-4C7B-A036-93D683A98264}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{646FBBFA-BFDB-4D5A-AF97-2C2DD8CB5CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{646FBBFA-BFDB-4D5A-AF97-2C2DD8CB5CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{646FBBFA-BFDB-4D5A-AF97-2C2DD8CB5CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{646FBBFA-BFDB-4D5A-AF97-2C2DD8CB5CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29B8B2CC-8896-4C7B-A036-93D683A98264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29B8B2CC-8896-4C7B-A036-93D683A98264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29B8B2CC-8896-4C7B-A036-93D683A98264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29B8B2CC-8896-4C7B-A036-93D683A98264}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
