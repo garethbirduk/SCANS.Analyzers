@@ -1,7 +1,7 @@
 
-# SCARS.Analyzers
+# SCANS.Analyzers
 
-SCARS (Short Cuts Are Rarely Shorter) is a framework focused on **clean, testable, and logic-separated .NET code**. The **SCARS.Analyzers** project contains **Roslyn analyzers** that enforce key architectural rules and best practices within your .NET codebase, ensuring consistent quality and maintainability.
+SCANS (Short Cuts Are Never Shorter) is a framework focused on **clean, testable, and logic-separated .NET code**. The **SCANS.Analyzers** project contains **Roslyn analyzers** that enforce key architectural rules and best practices within your .NET codebase, ensuring consistent quality and maintainability, ensuring compliance with the SCARS (Short Cuts Are Rarely Shorter) philosophy.
 
 ## Features
 
@@ -13,25 +13,25 @@ SCARS (Short Cuts Are Rarely Shorter) is a framework focused on **clean, testabl
 
 ## Installation
 
-To install and use SCARS.Analyzers in your project, follow the steps below:
+To install and use SCANS.Analyzers in your project, follow the steps below:
 
 ### Install via NuGet
 
-You can add the SCARS.Analyzers NuGet package to your project by running the following command:
+You can add the SCANS.Analyzers NuGet package to your project by running the following command:
 
 ```bash
-dotnet add package SCARS.Analyzers --version x.y.z
+dotnet add package SCANS.Analyzers --version x.y.z
 ```
 
-Replace `x.y.z` with the latest stable version of **SCARS.Analyzers**.
+Replace `x.y.z` with the latest stable version of **SCANS.Analyzers**.
 
 ### Install via Visual Studio (Package Manager)
 
-If you are using Visual Studio, you can install the SCARS.Analyzers NuGet package from the **NuGet Package Manager** by searching for `SCARS.Analyzers`.
+If you are using Visual Studio, you can install the SCANS.Analyzers NuGet package from the **NuGet Package Manager** by searching for `SCANS.Analyzers`.
 
 ## Usage
 
-Once the package is installed, the analyzers will automatically be included in your build process. They will run as part of your **compiler warnings** during compilation. You will receive feedback and error messages directly in your build output, indicating any violations of SCARS architectural principles.
+Once the package is installed, the analyzers will automatically be included in your build process. They will run as part of your **compiler warnings** during compilation. You will receive feedback and error messages directly in your build output, indicating any violations of SCANS architectural principles.
 
 ### Example Rules
 
@@ -48,7 +48,7 @@ For example, you can disable a rule globally using the following in your `.edito
 ```ini
 # Disable Unmockable rule globally
 [*.cs]
-dotnet_diagnostic.Scars001.severity = none
+dotnet_diagnostic.SCANS001.severity = none
 ```
 
 ## Configuration
@@ -58,18 +58,18 @@ The analyzers can be configured via the `.editorconfig` file, which allows you t
 ### Example Configuration:
 
 ```ini
-# .editorconfig file configuration for SCARS.Analyzers
+# .editorconfig file configuration for SCANS.Analyzers
 
 [*.cs]
-# Enable or disable SCARS rules
-dotnet_diagnostic.Scars001.severity = error # Block mocking unmockable types
-dotnet_diagnostic.Scars002.severity = warning # Enforce Glue vs Logic
-dotnet_diagnostic.Scars003.severity = none # Disable method length check
+# Enable or disable SCANS rules
+dotnet_diagnostic.SCANS001.severity = error # Block mocking unmockable types
+dotnet_diagnostic.SCANS002.severity = warning # Enforce Glue vs Logic
+dotnet_diagnostic.SCANS003.severity = none # Disable method length check
 ```
 
 ## Contributing
 
-Contributions to the SCARS.Analyzers project are welcome! To contribute:
+Contributions to the SCANS.Analyzers project are welcome! To contribute:
 
 1. Fork the repository.
 2. Create a new branch for your feature or bugfix (`git checkout -b feature/your-feature`).
@@ -79,13 +79,13 @@ Contributions to the SCARS.Analyzers project are welcome! To contribute:
 
 ### Testing and Running the Analyzers Locally
 
-To run the analyzers locally or test them in your project, you can use **Roslyn-based test projects** or manually build and test against your codebase. Ensure your project is correctly referencing the `SCARS.Analyzers` NuGet package.
+To run the analyzers locally or test them in your project, you can use **Roslyn-based test projects** or manually build and test against your codebase. Ensure your project is correctly referencing the `SCANS.Analyzers` NuGet package.
 
 ## License
 
-SCARS.Analyzers is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+SCANS.Analyzers is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
 - This project makes use of **Roslyn Analyzers** to enforce architectural rules in .NET.
-- Inspired by the SCARS philosophy, which emphasizes clean code and avoiding shortcuts that lead to technical debt.
+- Inspired by the SCANS philosophy, which emphasizes clean code and avoiding shortcuts that lead to technical debt.

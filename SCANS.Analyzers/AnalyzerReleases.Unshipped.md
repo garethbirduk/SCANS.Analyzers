@@ -5,4 +5,4 @@
 
 Rule ID | Category | Severity | Notes
 --------|----------|----------|-------
-SCARS001 | SCARS | Error | UnmockableUsageAnalyzer
+SCANS001 | SCANS | Error | UnmockableUsageAnalyzer

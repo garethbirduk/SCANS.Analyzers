@@ -1,4 +1,4 @@
-name: NuGet Versioning Workflow
+name: SCANS.Analyzers
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 9.0.x
 
     - name: Print .NET SDK version
       run: dotnet --version
@@ -43,7 +43,7 @@ jobs:
       id: get_version
       run: |
         # Extract the version number from the .csproj file
-        version=$(grep -oP '(?<=<Version>)(.*?)(?=</Version>)' SCARS.Analyzers/SCARS.Analyzers.csproj)
+        version=$(grep -oP '(?<=<Version>)(.*?)(?=</Version>)' SCANS.Analyzers/SCANS.Analyzers.csproj)
         echo "Version from .csproj is $version"
         echo "::set-output name=version::$version"
 
@@ -68,13 +68,13 @@ jobs:
     - name: Update Version in .csproj
       run: |
         # Update the version in the .csproj file based on the branch version
-        sed -i 's/<Version>.*<\/Version>/<Version>${{ steps.set_version.outputs.version }}<\/Version>/' SCARS.Analyzers/SCARS.Analyzers.csproj
+        sed -i 's/<Version>.*<\/Version>/<Version>${{ steps.set_version.outputs.version }}<\/Version>/' SCANS.Analyzers/SCANS.Analyzers.csproj
         echo "Updated .csproj version to ${{ steps.set_version.outputs.version }}"
 
     - name: Pack NuGet Package
       run: |
         # Pack the NuGet package with the updated version
-        dotnet pack ./SCARS.Analyzers/SCARS.Analyzers.csproj --configuration Release --output ./nupkgs
+        dotnet pack ./SCANS.Analyzers/SCANS.Analyzers.csproj --configuration Release --output ./nupkgs
 
     - name: Check if GH_APIKEY exists
       run: |
